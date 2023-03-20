@@ -4,6 +4,6 @@ namespace NewShore.Domain.Serivces.Flights
 {
 	public interface IFlightsGetter
 	{
-		List<Flight> Get();
+		IEnumerable<Flight> Get();
 	}
 }
