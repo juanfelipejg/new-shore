@@ -19,6 +19,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewShore.Application", "NewShore.Application\NewShore.Application.csproj", "{3C22670A-21AE-41CE-BAC1-356BC6097B9A}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dtos", "Dtos", "{F3A814C8-8380-49EA-8193-1F9BACE86C99}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewShore.Dtos", "NewShore.Dtos\NewShore.Dtos.csproj", "{0B6BDDB4-CF2A-4B0B-90C1-0B02720BE04A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +45,10 @@ Global
 		{3C22670A-21AE-41CE-BAC1-356BC6097B9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3C22670A-21AE-41CE-BAC1-356BC6097B9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3C22670A-21AE-41CE-BAC1-356BC6097B9A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B6BDDB4-CF2A-4B0B-90C1-0B02720BE04A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B6BDDB4-CF2A-4B0B-90C1-0B02720BE04A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B6BDDB4-CF2A-4B0B-90C1-0B02720BE04A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B6BDDB4-CF2A-4B0B-90C1-0B02720BE04A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -50,6 +58,7 @@ Global
 		{B1EE6CFC-BB98-4CEE-96AB-E9E56FA64BFB} = {9BB14F67-3BB7-46F9-A8F4-1055368006E9}
 		{3D47F38F-0ABC-452F-8259-53B5783F05D0} = {84705FE1-415B-48AF-852D-144F7FC649F0}
 		{3C22670A-21AE-41CE-BAC1-356BC6097B9A} = {BF5D55BF-B515-43E3-9BDC-7BFF9F5E1B9F}
+		{0B6BDDB4-CF2A-4B0B-90C1-0B02720BE04A} = {F3A814C8-8380-49EA-8193-1F9BACE86C99}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BB917F40-F4ED-4F4D-B43E-3C1334268783}

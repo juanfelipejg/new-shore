@@ -17,7 +17,8 @@ namespace NewShore.Infrastructure.Services
 		public List<Flight> Get()
 		{
 			var request = new RestRequest( "/2" );
-			return this.restClientWrapper.Get<List<Flight>>( request );
+			var response = this.restClientWrapper.GetFlights( request );
+			return new List<Flight>();
 		}
 	}
 }

@@ -1,10 +1,9 @@
-﻿using NewShore.Domain.Models.Flights;
-using RestSharp;
-
-namespace NewShore.Infrastructure.Wrapper
+﻿namespace NewShore.Infrastructure.Wrapper
 {
+	using Dtos.Flights;
+	using RestSharp;
 	public interface IRestClientWrapper
 	{
-		T Get<T>( RestRequest request ) where T : class;
+		List<Flight> GetFlights( RestRequest request );
 	}
 }

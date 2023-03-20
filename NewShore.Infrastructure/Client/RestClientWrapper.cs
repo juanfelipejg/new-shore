@@ -1,19 +1,20 @@
-﻿using RestSharp;
-
-namespace NewShore.Infrastructure.Wrapper
+﻿namespace NewShore.Infrastructure.Wrapper
 {
+	using Dtos.Flights;
+	using RestSharp;
+	
 	public class RestClientWrapper: IRestClientWrapper
 	{
 		private readonly RestClient client;
 
 		public RestClientWrapper()
 		{
-			this.client = new RestClient( "https://recruiting-api.newshore.es/api/flights/2" );
+			this.client = new RestClient( "https://recruiting-api.newshore.es/api/flights" );
 		}
 
-		public T Get<T>( RestRequest request ) where T : class
+		public List<Flight> GetFlights( RestRequest request )
 		{
-			return this.client.Get<T>( request );
+			return this.client.Get<List<Flight>>( request );
 		}
 	}
 }

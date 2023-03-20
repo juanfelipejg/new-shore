@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -8,6 +8,13 @@
 
   <ItemGroup>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\NewShore.Application\NewShore.Application.csproj" />
+    <ProjectReference Include="..\NewShore.Domain\NewShore.Domain.csproj" />
+    <ProjectReference Include="..\NewShore.Dtos\NewShore.Dtos.csproj" />
+    <ProjectReference Include="..\NewShore.Infrastructure\NewShore.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
