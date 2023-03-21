@@ -1,11 +1,11 @@
-﻿using AutoMapper;
-using NewShore.Domain.Models.Flights;
-using NewShore.Domain.Serivces.Flights;
-using NewShore.Infrastructure.Wrapper;
-using RestSharp;
-
-namespace NewShore.Infrastructure.Services
+﻿namespace NewShore.Infrastructure.Services
 {
+	using AutoMapper;
+	using Domain.Models.Flights;
+	using Domain.Serivces.Flights;
+	using RestSharp;
+	using Wrapper;
+
 	public class FlightsGetter: IFlightsGetter
 	{
 		private readonly IRestClientWrapper restClientWrapper;
@@ -21,7 +21,7 @@ namespace NewShore.Infrastructure.Services
 		{
 			var request = new RestRequest( "/2" );
 			List<Dtos.Flights.Flight> response = this.restClientWrapper.GetFlights( request );
-			return this.mapper.Map<IEnumerable<Infrastructure.Dtos.Flights.Flight>, IEnumerable<Flight>>( response );
+			return this.mapper.Map<IEnumerable<Dtos.Flights.Flight>, IEnumerable<Flight>>( response );
 		}
 	}
 }

@@ -16,9 +16,14 @@ namespace NewShore.Api.Controllers
 		}
 
 		[HttpGet]
-		public Journey Get( [FromQuery] Dtos.Journeys.Journey journey)
+		public IActionResult Get( [FromQuery] Dtos.Journeys.Journey journey)
 		{
-			return this.journeyService.Get( journey );
+			if( journey.Origin == journey.Destination )
+			{
+				return BadRequest( "El valor de origin y destination no pueden ser iguales." );
+			}
+
+			return Ok(this.journeyService.Get( journey ));
 		}
 	}
 }
