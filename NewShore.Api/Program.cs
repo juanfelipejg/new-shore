@@ -1,9 +1,12 @@
+using Microsoft.EntityFrameworkCore;
 using NewShore.Application.Services.Journeys;
 using NewShore.Domain.Serivces.Flights;
+using NewShore.Infrastructure.Data;
 using NewShore.Infrastructure.Services;
 using NewShore.Infrastructure.Wrapper;
 
 var builder = WebApplication.CreateBuilder(args);
+string connectionString = builder.Configuration.GetConnectionString( "Default" );
 
 // Add services to the container.
 
@@ -18,6 +21,8 @@ builder.Services.AddSwaggerGen( options =>
 builder.Services.AddScoped<IJourneyService, JourneyService>();
 builder.Services.AddScoped<IFlightsGetter, FlightsGetter>();
 builder.Services.AddScoped<IRestClientWrapper, RestClientWrapper>();
+builder.Services.AddScoped<INewShoreContext, NewShoreContext>();
+builder.Services.AddDbContext<NewShoreContext>( context => context.UseMySql( connectionString, ServerVersion.AutoDetect( connectionString ) ) );
 
 var app = builder.Build();
 

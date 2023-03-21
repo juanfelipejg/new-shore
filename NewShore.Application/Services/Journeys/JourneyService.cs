@@ -3,28 +3,56 @@
 	using Domain.Models.Flights;
 	using Domain.Models.Journeys;
 	using Domain.Serivces.Flights;
+	using Infrastructure.Data;
 
 	public class JourneyService: IJourneyService
 	{
 		private readonly IFlightsGetter _flightsGetter;
+		private readonly INewShoreContext _newShoreContext;
 
-		public JourneyService( IFlightsGetter flightsGetter )
+		public JourneyService( IFlightsGetter flightsGetter, INewShoreContext newShoreContext )
 		{
 			this._flightsGetter = flightsGetter;
+			this._newShoreContext = newShoreContext;
 		}
 
 		public Journey Get( Dtos.Journeys.Journey journey )
 		{
-			IEnumerable<Flight> flights = this._flightsGetter.Get();
+			try
+			{
+				Journey? journeySaved = this._newShoreContext.Journeys().FirstOrDefault( j => j.Origin == journey.Origin && j.Destination == j.Destination );
 
-			IEnumerable<Flight> route = CalculateRoute( journey, flights );
+				if ( journeySaved == null ) {
 
-			decimal price = route.Sum( f => f.Price );
+					IEnumerable<Flight> flights = this._flightsGetter.Get();
 
-			return new Journey( journey.Origin, journey.Destination, price, route );
+					List<Flight> route = CalculateRoute( journey, flights );
+
+					decimal price = route.Sum( f => f.Price );
+
+					var journeyToSave = new Journey( journey.Origin, journey.Destination, price ) ;
+					
+					journeyToSave.AddFlights( route );
+
+					this._newShoreContext.Journeys().Add( journeyToSave );
+					this._newShoreContext.SaveChanges();
+
+					return journeyToSave;
+				}
+
+				else
+				{
+					return journeySaved;
+				}
+			}
+
+			catch ( Exception ex )
+			{
+				throw new ApplicationException( "Ocurrió un error al buscar un viaje. Por favor, inténtelo de nuevo más tarde.", ex );
+			}
 		}
 
-		private static IEnumerable<Flight> CalculateRoute( Dtos.Journeys.Journey journey, IEnumerable<Flight> flights )
+		private static List<Flight> CalculateRoute( Dtos.Journeys.Journey journey, IEnumerable<Flight> flights )
 		{
 			var routes = new List<Flight>();
 			Flight? directFlight = flights?.FirstOrDefault( f => f.Origin == journey.Origin && f.Destination == journey.Destination );
