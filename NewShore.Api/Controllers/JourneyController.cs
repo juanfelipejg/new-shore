@@ -1,9 +1,9 @@
-using Microsoft.AspNetCore.Mvc;
-using NewShore.Application.Services.Journeys;
-using NewShore.Domain.Models.Journeys;
-
 namespace NewShore.Api.Controllers
 {
+	using Application;
+	using Application.Services.Journeys;
+	using Microsoft.AspNetCore.Mvc;
+
 	[ApiController]
 	[Route( "[controller]" )]
 	public class JourneyController: ControllerBase
@@ -20,10 +20,18 @@ namespace NewShore.Api.Controllers
 		{
 			if( journey.Origin == journey.Destination )
 			{
-				return BadRequest( "El valor de origin y destination no pueden ser iguales." );
+				return this.BadRequest( "El valor de origin y destination no pueden ser iguales." );
 			}
 
-			return Ok(this.journeyService.Get( journey ));
+			try
+			{
+				return this.Ok( this.journeyService.Get( journey ) );
+			}
+
+			catch ( RouteNotFound ex )
+			{
+				return this.NotFound( new { error = ex.Message } );
+			}			
 		}
 	}
 }

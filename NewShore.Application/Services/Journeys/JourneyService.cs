@@ -1,10 +1,9 @@
 ﻿namespace NewShore.Application.Services.Journeys
 {
-	using System.Net;
-	using System.Web.Http;
 	using Domain.Models.Flights;
 	using Domain.Models.Journeys;
 	using Domain.Serivces.Flights;
+
 	public class JourneyService: IJourneyService
 	{
 		private readonly IFlightsGetter _flightsGetter;
@@ -13,6 +12,7 @@
 		{
 			this._flightsGetter = flightsGetter;
 		}
+
 		public Journey Get( Dtos.Journeys.Journey journey )
 		{
 			IEnumerable<Flight> flights = this._flightsGetter.Get();
@@ -42,12 +42,7 @@
 				return routes;
 			}
 
-			var response = new HttpResponseMessage( HttpStatusCode.NotFound )
-			{
-				Content = new StringContent( $"No se pudo encontrar una ruta para el viaje seleccionado" )
-			};
-
-			throw new HttpResponseException( response );
+			throw new RouteNotFound();			
 		}
 
 		private static List<Flight> CalculateAlternativeRoutes( Dtos.Journeys.Journey journey, IEnumerable<Flight>? flights )
