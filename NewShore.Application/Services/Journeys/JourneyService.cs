@@ -4,6 +4,7 @@
 	using Domain.Models.Journeys;
 	using Domain.Serivces.Flights;
 	using Infrastructure.Data;
+	using Microsoft.EntityFrameworkCore;
 
 	public class JourneyService: IJourneyService
 	{
@@ -20,7 +21,7 @@
 		{
 			try
 			{
-				Journey? journeySaved = this._newShoreContext.Journeys().FirstOrDefault( j => j.Origin == journey.Origin && j.Destination == j.Destination );
+				Journey? journeySaved = this._newShoreContext.Journeys().Include( j => j.Flights ).FirstOrDefault( j => j.Origin == journey.Origin && j.Destination == j.Destination );
 
 				if ( journeySaved == null ) {
 
